@@ -1,5 +1,6 @@
 package key.software.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,7 @@ public class Product {
     private LocalDateTime productCreatedAt;
     private LocalDateTime productUpdatedAt;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     private Category category;
 

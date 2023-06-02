@@ -14,8 +14,8 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> addProduct(@RequestBody Product product){
-        return productService.createProduct(product);
+    public ResponseEntity<?> addProductInCategory(@RequestBody Product product, @RequestParam("id") int categoryId){
+        return productService.saveProductInCategory(product,categoryId);
     }
 
     @GetMapping("/")
@@ -38,8 +38,8 @@ public class ProductController {
         return productService.updateProduct(productId,product);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteProduct(@RequestParam("id") int productId){
-        return productService.deleteProduct(productId);
-    }
+//    @DeleteMapping("/delete")
+//    public ResponseEntity<?> deleteProduct(@RequestParam("id") int productId){
+//        return productService.deleteProduct(productId);
+//    }
 }

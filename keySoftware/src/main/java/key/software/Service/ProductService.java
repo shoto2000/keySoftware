@@ -7,7 +7,7 @@ public interface ProductService {
     public ResponseEntity<?> getAllProduct();
     public ResponseEntity<?> getProductById(int productId);
     public ResponseEntity<?> getAllProductByCategoryId(int categoryId);
-    public ResponseEntity<?> createProduct(Product product);
+    public ResponseEntity<?> saveProductInCategory(Product product, int categoryId);
     public ResponseEntity<?> updateProduct(int productId, Product product);
-    public ResponseEntity<?> deleteProduct(int productId);
+//    public ResponseEntity<?> deleteProduct(int productId);
 }
