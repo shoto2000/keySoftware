@@ -23,4 +23,12 @@ public class Category {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Product> products;
+
+    public Category(Integer categoryId, String categoryName, String categoryDescription, LocalDateTime createdTime, LocalDateTime updatedTime) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.categoryDescription = categoryDescription;
+        this.createdTime = createdTime;
+        this.updatedTime = updatedTime;
+    }
 }
