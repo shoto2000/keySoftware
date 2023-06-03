@@ -6,7 +6,7 @@ A Mini Product Listing Page to perform simple CRUD operations creted with 2 Simp
 80% of Backend Code is covered with UnitTesting
 
 ## Table of Contents
-1. [Teck Stack](#techStack)
+1. [Teck Stack](#tech Stack)
 2. [Prerequisites](#prerequisites)
 3. [Installation](#installation)
 4. [Documentation and Deployed Links]
