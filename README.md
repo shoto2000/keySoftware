@@ -9,7 +9,7 @@ A Mini Product Listing Page to perform simple CRUD operations creted with 2 Simp
 1. [Teck Stack](#techStack)
 2. [Prerequisites](#prerequisites)
 3. [Installation](#installation)
-4. [Documentation and Deployed Links]
+4. [Documentaion](#documentation)
 
 ## TeckStack
 1. Java
@@ -38,3 +38,15 @@ Before running the application, make sure you have the following prerequisites i
    ```
 3. Compile the code and run it.
 
+## Documentaion
+
+### Deployed Frontend 
+[Key-Software](https://key-software.netlify.app/)
+
+### Documentation Backend
+[Notion Documentaion](https://www.notion.so/Key-Software-90409cc9ab9f49abb553055eaa11c7b5)
+
+### ER-Diagram
+<img>https://github.com/shoto2000/keySoftware/blob/Working/keySoftware2.png</img>
+
+<h1 align="center"> Thank You</h1>
