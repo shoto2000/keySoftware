@@ -5,14 +5,73 @@ body {
   padding: 20px;
 }
 
+#navbar{
+  height: 50px;
+  width: 100%;
+  justify-content: space-around;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#navbar a{
+  text-decoration: none;
+  color: white;
+}
+
 h1 {
   margin-top: 0;
 }
 
-#productContainer {
+#productContainer,#deletedProductContainer{
+  border-radius: 10px;
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(4, 1fr);
+}
+
+#productContainer button{
+  margin: auto;
+  padding: 5px;
+  border-color: red;
+  background-color: transparent;
+  color: red;
+  border-radius: 3px;
+}
+
+#productContainer button:hover{
+  background-color: red;
+  color: white;
+}
+
+#twoButtons{
+  display: flex;
+  justify-content: space-around;
+}
+
+#productContainer #updateButton{
+  border-color: #45a049;
+  color: #45a049;
+}
+
+#productContainer #updateButton:hover{
+  background-color: #45a049;
+  color: white;
+}
+
+#deletedProductContainer button{
+  margin: auto;
+  padding: 5px;
+  border-color: #45a049;
+  background-color: transparent;
+  color: #45a049;
+  border-radius: 3px;
+}
+
+#deletedProductContainer button:hover{
+  background-color: #45a049;
+  color: white;
 }
 
 #categoryContainer{
@@ -22,39 +81,60 @@ h1 {
 }
 
 .category-item{
+  text-align: center;
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
-.product-item {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+.category-item button{
+  padding: 5px;
+  border-color: red;
+  background-color: transparent;
+  border-radius: 3px;
+  color: red;
+}
+
+.category-item button:hover{
+  background-color: red;
+  color: white;
 }
 
 .product-item {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   display: grid;
   grid-template-rows: auto 1fr;
   gap: 10px;
 }
 
 .product-image {
+  height: 200px;
   text-align: center;
 }
 
 .product-image img {
   max-width: 100%;
-  height: auto;
+  height: 200px;
   border-radius: 5px;
 }
 
+h1{
+  text-align: center;
+}
+
 form {
+  text-align: center;
   background-color: #fff;
+  width: 40%;
+  margin: auto;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
 form div {
@@ -83,15 +163,18 @@ form select {
 form button[type="submit"] {
   align-self: flex-end;
   margin-top: 15px;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
+  border-radius: 3px;
+  border-color: #45a049;
+  color: #45a049;
+  background: transparent;
   padding: 10px 16px;
   font-size: 16px;
   cursor: pointer;
   border-radius: 3px;
+  margin: auto;
 }
 
 form button[type="submit"]:hover {
   background-color: #45a049;
+  color: white;
 }
