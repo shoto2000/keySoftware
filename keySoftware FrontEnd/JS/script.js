@@ -62,13 +62,30 @@ fetch('http://localhost:8080/product/')
                 </div>
                 <div id="twoButtons">
                     <button onclick="deleteProduct(${product.productId})">Delete</button>
-                    <button onclick="updateProduct(${product.productId})" id="updateButton">update</button>
+                    <button onclick="openUpdatePage(${product.productId})" id="updateButton">update</button>
                 </div>
             `;
 
             productContainer.appendChild(productElement);
         });
     });
+
+    function openUpdatePage(productId) {
+        // Open the update page in a new window/tab
+        const updatePage = window.open('update.html', '_blank');
+        
+        // Fetch the product details based on the productId
+        fetch(`http://localhost:8080/product/${productId}`)
+          .then(response => response.json())
+          .then(product => {
+            // Pass the product details to the update page
+            updatePage.productDetails = product;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+    
 
 
 // Function to delete a product
