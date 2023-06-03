@@ -1,7 +1,7 @@
 <h1 align="center"> Key-Software - Product Listing</h1>
 
 ## Description
-A Mini Product Listing Page to perform simple CRUD operations creted with 2 Simple Entities Product and Category with OneToMany Mapping and Implemented Prontend also.
+A Mini Product Listing Page to perform simple CRUD operations creted with 2  Entities Product and Category with OneToMany Mapping and Implemented Frontend also.
 
 80% of Backend Code is covered with UnitTesting
 
@@ -34,7 +34,7 @@ Before running the application, make sure you have the following prerequisites i
    ```
 2. Navigate to the project directory: 
    ```
-     cd \keySoftware\src\main\java\key\software
+   cd \keySoftware\src\main\java\key\software
    ```
 3. Compile the code and run it.
 
@@ -47,6 +47,6 @@ Before running the application, make sure you have the following prerequisites i
 [Notion Documentaion](https://www.notion.so/Key-Software-90409cc9ab9f49abb553055eaa11c7b5)
 
 ### ER-Diagram
-<img>https://github.com/shoto2000/keySoftware/blob/Working/keySoftware2.png</img>
+![ER-Diagram](https://github.com/shoto2000/keySoftware/blob/Working/keySoftware2.png)
 
 <h1 align="center"> Thank You</h1>
