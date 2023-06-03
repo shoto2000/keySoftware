@@ -6,6 +6,7 @@ import key.software.Model.Product;
 import key.software.Repository.CategoryRepository;
 import key.software.Repository.ProductRepository;
 import key.software.Response.DeleteResponse;
+import key.software.Response.UndoResponse;
 import key.software.Service.ProductServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -159,6 +161,91 @@ class ProductServiceImplTest {
         when(productRepository.findById(productId)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> productService.updateProduct(productId, updatedProduct));
+    }
+
+    @Test
+    void deleteProduct_WithExistingProduct_DeletesProductAndReturnsOkResponse() {
+        // Arrange
+        int productId = 1;
+        Product existingProduct = new Product(productId, "Product 1", 10.0, "Description 1", "Brand 1", "Image 1", 10, 1.0, 2.0, 3.0, "Color 1",false, LocalDateTime.now(), LocalDateTime.now(), null);
+
+        when(productRepository.findById(productId)).thenReturn(Optional.of(existingProduct));
+        when(productRepository.save(any(Product.class))).thenReturn(existingProduct);
+
+        // Act
+        ResponseEntity<?> responseEntity = productService.deleteProduct(productId);
+
+        // Assert
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertNotNull(responseEntity.getBody());
+        assertTrue(responseEntity.getBody() instanceof DeleteResponse);
+        DeleteResponse deleteResponse = (DeleteResponse) responseEntity.getBody();
+        assertEquals("Product Deleted Successfully", deleteResponse.getMessage());
+        assertTrue(existingProduct.getProductDeleted());
+        verify(productRepository, times(1)).save(existingProduct);
+    }
+
+    @Test
+    void deleteProduct_WithNonExistingProduct_ThrowsResourceNotFoundException() {
+        // Arrange
+        int productId = 1;
+
+        when(productRepository.findById(productId)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class, () -> productService.deleteProduct(productId));
+        verify(productRepository, times(0)).save(any(Product.class));
+    }
+
+
+    @Test
+    void undoProduct_WithNonExistingProduct_ThrowsResourceNotFoundException() {
+        // Arrange
+        int productId = 1;
+
+        when(productRepository.findById(productId)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class, () -> productService.undoProduct(productId));
+        verify(productRepository, times(0)).save(any(Product.class));
+    }
+
+    @Test
+    void undoProduct_WithNonDeletedProduct_ThrowsResourceNotFoundException() {
+        // Arrange
+        int productId = 1;
+        Product existingProduct = new Product(productId, "Product 1", 10.0, "Description 1", "Brand 1", "Image 1", 10, 1.0, 2.0, 3.0, "Color 1",false, LocalDateTime.now(), LocalDateTime.now(), null);
+
+        when(productRepository.findById(productId)).thenReturn(Optional.of(existingProduct));
+
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class, () -> productService.undoProduct(productId));
+        verify(productRepository, times(0)).save(any(Product.class));
+    }
+
+    @Test
+    void getAllDeletedProducts_ReturnsListOfDeletedProducts() {
+        // Arrange
+        Product product1 = new Product(1, "Product 1", 10.0, "Description 1", "Brand 1", "Image 1", 10, 1.0, 2.0, 3.0, "Color 1", true, LocalDateTime.now(), LocalDateTime.now(), null);
+        Product product2 = new Product(2, "Product 2", 20.0, "Description 2", "Brand 2", "Image 2", 20, 2.0, 3.0, 4.0, "Color 2",true, LocalDateTime.now(), LocalDateTime.now(), null);
+        Product product3 = new Product(3, "Product 3", 30.0, "Description 3", "Brand 3", "Image 3", 30, 3.0, 4.0, 5.0, "Color 3",false, LocalDateTime.now(), LocalDateTime.now(), null);
+
+        List<Product> productList = Arrays.asList(product1, product2, product3);
+
+        when(productRepository.findAll()).thenReturn(productList);
+
+        // Act
+        ResponseEntity<?> responseEntity = productService.getAllDeletedProducts();
+
+        // Assert
+        assertEquals(HttpStatus.FOUND, responseEntity.getStatusCode());
+        assertNotNull(responseEntity.getBody());
+        assertTrue(responseEntity.getBody() instanceof List);
+        List<?> responseList = (List<?>) responseEntity.getBody();
+        assertEquals(2, responseList.size());
+        assertTrue(responseList.contains(product1));
+        assertTrue(responseList.contains(product2));
+        assertFalse(responseList.contains(product3));
     }
 
 }
