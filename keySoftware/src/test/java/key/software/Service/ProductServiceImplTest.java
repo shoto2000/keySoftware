@@ -119,23 +119,20 @@ class ProductServiceImplTest {
         assertThrows(ResourceNotFoundException.class, () -> productService.getAllProductByCategoryId(categoryId));
     }
 
-    
+
 
     @Test
     void saveProductInCategory_WithInvalidCategoryId_ThrowsResourceNotFoundException() {
-        // Arrange
         int categoryId = 1;
         Product product = new Product(null, "Product 1", 10.0, "Description 1", "Brand 1", "Image 1", 10, 1.0, 2.0, 3.0, "Color 1", null, null, null);
 
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.empty());
 
-        // Act & Assert
         assertThrows(ResourceNotFoundException.class, () -> productService.saveProductInCategory(product, categoryId));
     }
 
     @Test
     void updateProduct_WithValidProductId_ReturnsUpdatedProduct() {
-        // Arrange
         int productId = 1;
         Product existingProduct = new Product(productId, "Product 1", 10.0, "Description 1", "Brand 1", "Image 1", 10, 1.0, 2.0, 3.0, "Color 1", LocalDateTime.now(), LocalDateTime.now(), null);
         Product updatedProduct = new Product(productId, "Updated Product", 20.0, "Updated Description", "Updated Brand", "Updated Image", 20, 2.0, 3.0, 4.0, "Updated Color", LocalDateTime.now(), LocalDateTime.now(), null);
@@ -143,10 +140,8 @@ class ProductServiceImplTest {
         when(productRepository.findById(productId)).thenReturn(Optional.of(existingProduct));
         when(productRepository.save(any(Product.class))).thenReturn(updatedProduct);
 
-        // Act
         ResponseEntity<?> responseEntity = productService.updateProduct(productId, updatedProduct);
 
-        // Assert
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertNotNull(responseEntity.getBody());
         assertTrue(responseEntity.getBody() instanceof Product);
@@ -158,13 +153,11 @@ class ProductServiceImplTest {
 
     @Test
     void updateProduct_WithInvalidProductId_ThrowsResourceNotFoundException() {
-        // Arrange
         int productId = 1;
         Product updatedProduct = new Product(productId, "Updated Product", 20.0, "Updated Description", "Updated Brand", "Updated Image", 20, 2.0, 3.0, 4.0, "Updated Color", LocalDateTime.now(), LocalDateTime.now(), null);
 
         when(productRepository.findById(productId)).thenReturn(Optional.empty());
 
-        // Act & Assert
         assertThrows(ResourceNotFoundException.class, () -> productService.updateProduct(productId, updatedProduct));
     }
 

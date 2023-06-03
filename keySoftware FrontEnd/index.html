@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category and Product Management</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <h1>Category Management</h1>
+    <div id="categoryContainer">
+        <!-- Category-related HTML content will be dynamically added here -->
+    </div>
+
+    <h1>Add Category</h1>
+    <form id="categoryForm">
+        <div>
+            <label for="categoryName">Category Name:</label>
+            <input type="text" id="categoryName" name="categoryName" required>
+        </div>
+        <div>
+            <label for="categoryDescription">Category Description:</label>
+            <textarea id="categoryDescription" name="categoryDescription" required></textarea>
+        </div>
+        <button type="submit">Add Category</button>
+    </form>
+
+
+    <h1>Product Management</h1>
+    <div id="productContainer">
+        <!-- Product-related HTML content will be dynamically added here -->
+    </div>
+
+    <h1>Add Product</h1>
+    
+    <form id="productForm">
+        <div>
+            <label for="productName">Product Name:</label>
+            <input type="text" id="productName" name="productName" required>
+        </div>
+        <div>
+            <label for="productDescription">Product Description:</label>
+            <textarea id="productDescription" name="productDescription" required></textarea>
+        </div>
+        <div>
+            <label for="productPrice">Product Price:</label>
+            <input type="number" id="productPrice" name="productPrice" required>
+        </div>
+        <div>
+            <label for="productBrand">Product Brand:</label>
+            <input type="text" id="productBrand" name="productBrand" required>
+        </div>
+        <div>
+            <label for="productImageUrl">Product Image URL:</label>
+            <input type="text" id="productImageUrl" name="productImageUrl" required>
+        </div>
+        <div>
+            <label for="productAvailableQuantity">Product Available Quantity:</label>
+            <input type="number" id="productAvailableQuantity" name="productAvailableQuantity" required>
+        </div>
+        <div>
+            <label for="productLengthInCm">Product Length (in cm):</label>
+            <input type="number" id="productLengthInCm" name="productLengthInCm" required>
+        </div>
+        <div>
+            <label for="productBreadthInCm">Product Breadth (in cm):</label>
+            <input type="number" id="productBreadthInCm" name="productBreadthInCm" required>
+        </div>
+        <div>
+            <label for="productHeightInCm">Product Height (in cm):</label>
+            <input type="number" id="productHeightInCm" name="productHeightInCm" required>
+        </div>
+        <div>
+            <label for="productColor">Product Color:</label>
+            <input type="text" id="productColor" name="productColor" required>
+        </div>
+        <div>
+            <label for="categorySelector">Category:</label>
+            <select id="categorySelector" name="categoryId" required>
+                <!-- Options will be populated dynamically using JavaScript -->
+            </select>
+        </div>
+        <div>
+            <button type="submit">Add Product</button>
+        </div>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
