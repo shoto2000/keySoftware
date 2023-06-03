@@ -6,6 +6,7 @@ import key.software.Model.Product;
 import key.software.Repository.CategoryRepository;
 import key.software.Repository.ProductRepository;
 import key.software.Response.DeleteResponse;
+import key.software.Response.UndoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public ResponseEntity<?> getAllProduct() {
-        List<Product> products = productRepository.findAll();
+        List<Product> products = productRepository.findAll().stream().filter(a-> !a.getProductDeleted()).collect(Collectors.toList());
         return new ResponseEntity<>(products, HttpStatus.FOUND);
     }
 
@@ -34,7 +35,7 @@ public class ProductServiceImpl implements ProductService{
     public ResponseEntity<?> getProductById(int productId) {
         Optional<Product> productOptional = productRepository.findById(productId);
 
-        if(productOptional.isPresent()){
+        if(productOptional.isPresent() && !productOptional.get().getProductDeleted()){
             return new ResponseEntity<>(productOptional.get(),HttpStatus.FOUND);
         }
         throw new ResourceNotFoundException("Product not Found");
@@ -45,7 +46,7 @@ public class ProductServiceImpl implements ProductService{
         Optional<Category> categoryOptional = categoryRepository.findById(categoryId);
 
         if(categoryOptional.isPresent()){
-            List<Product> products = categoryOptional.get().getProducts();
+            List<Product> products = categoryOptional.get().getProducts().stream().filter(p->!p.getProductDeleted()).collect(Collectors.toList());
             return new ResponseEntity<>(products,HttpStatus.FOUND);
         }
         throw new ResourceNotFoundException("Category id is not present");
@@ -60,6 +61,7 @@ public class ProductServiceImpl implements ProductService{
         LocalDateTime now = LocalDateTime.now();
         product.setProductCreatedAt(now);
         product.setProductUpdatedAt(now);
+        product.setProductDeleted(false);
         Product savedProduct = productRepository.save(product);
 
         List<Product> categoryProducts = category.getProducts();
@@ -79,7 +81,35 @@ public class ProductServiceImpl implements ProductService{
             product.setProductUpdatedAt(LocalDateTime.now());
             return new ResponseEntity<>(productRepository.save(product),HttpStatus.OK);
         }
-        throw new ResourceNotFoundException("product with given id is not present");
+        throw new ResourceNotFoundException("Product Not Present");
+    }
+
+    @Override
+    public ResponseEntity<?> deleteProduct(int productId) {
+        Optional<Product> existingProduct = productRepository.findById(productId);
+        if (existingProduct.isPresent() && !existingProduct.get().getProductDeleted()) {
+            existingProduct.get().setProductDeleted(true);
+            productRepository.save(existingProduct.get());
+            return new ResponseEntity<>(new DeleteResponse("Product"),HttpStatus.OK);
+        }
+        throw new ResourceNotFoundException("Product Not Present");
+    }
+
+    @Override
+    public ResponseEntity<?> undoProduct(int productId) {
+        Optional<Product> existingProduct = productRepository.findById(productId);
+        if (existingProduct.isPresent() && existingProduct.get().getProductDeleted()) {
+            existingProduct.get().setProductDeleted(false);
+            productRepository.save(existingProduct.get());
+            return new ResponseEntity<>(new UndoResponse("Product"),HttpStatus.OK);
+        }
+        throw new ResourceNotFoundException("Product Not Present");
+    }
+
+    @Override
+    public ResponseEntity<?> getAllDeletedProducts() {
+        List<Product> products = productRepository.findAll().stream().filter(Product::getProductDeleted).collect(Collectors.toList());
+        return new ResponseEntity<>(products, HttpStatus.FOUND);
     }
 
 }

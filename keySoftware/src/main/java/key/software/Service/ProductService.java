@@ -9,5 +9,7 @@ public interface ProductService {
     public ResponseEntity<?> getAllProductByCategoryId(int categoryId);
     public ResponseEntity<?> saveProductInCategory(Product product, int categoryId);
     public ResponseEntity<?> updateProduct(int productId, Product product);
-//    public ResponseEntity<?> deleteProduct(int productId);
+    public ResponseEntity<?> deleteProduct(int productId);
+    public ResponseEntity<?> undoProduct(int productId);
+    public ResponseEntity<?> getAllDeletedProducts();
 }

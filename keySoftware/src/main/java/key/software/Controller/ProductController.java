@@ -38,8 +38,18 @@ public class ProductController {
         return productService.updateProduct(productId,product);
     }
 
-//    @DeleteMapping("/delete")
-//    public ResponseEntity<?> deleteProduct(@RequestParam("id") int productId){
-//        return productService.deleteProduct(productId);
-//    }
+    @PutMapping("/delete")
+    public ResponseEntity<?> deleteProduct(@RequestParam("id") int productId){
+        return productService.deleteProduct(productId);
+    }
+
+    @PutMapping("/undo")
+    public ResponseEntity<?> undoProduct(@RequestParam("id") int productId){
+        return productService.undoProduct(productId);
+    }
+
+    @GetMapping("/deleted/")
+    public ResponseEntity<?> getAllDeletedProduct(){
+        return productService.getAllDeletedProducts();
+    }
 }

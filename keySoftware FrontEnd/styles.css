@@ -21,11 +21,15 @@ h1 {
   grid-template-columns: repeat(6, 1fr);
 }
 
-.category-item,
+.category-item{
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 .product-item {
   background-color: #fff;
   padding: 20px;
-  align-items: center;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

@@ -28,8 +28,10 @@ public class Product {
     private Double productBreadthInCm;
     private Double productHeightInCm;
     private String productColor;
+    @JsonIgnore
+    private Boolean productDeleted;
     private LocalDateTime productCreatedAt;
-        private LocalDateTime productUpdatedAt;
+    private LocalDateTime productUpdatedAt;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
