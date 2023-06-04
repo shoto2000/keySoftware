@@ -44,7 +44,7 @@ Before running the application, make sure you have the following prerequisites i
 [Key-Software](https://key-software.netlify.app/)
 
 ### Documentation Backend
-[Notion Documentaion](https://www.notion.so/Key-Software-90409cc9ab9f49abb553055eaa11c7b5)
+[Notion Documentaion](https://fourth-cotton-66b.notion.site/Key-Software-90409cc9ab9f49abb553055eaa11c7b5)
 
 ### ER-Diagram
 ![ER-Diagram](https://github.com/shoto2000/keySoftware/blob/Working/keySoftware2.png)
