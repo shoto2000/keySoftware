@@ -30,7 +30,7 @@ Before running the application, make sure you have the following prerequisites i
 ## Installation
 1. Clone the repository:
    ```
-   https://github.com/AnshulKumarYadav/UNO_Card_Game.git
+   https://github.com/shoto2000/keySoftware.git
    ```
 2. Navigate to the project directory: 
    ```
